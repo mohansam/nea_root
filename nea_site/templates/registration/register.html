@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} User Registration {% endblock title %}
+
+{% block topnavbar %}
+    <a href="/">Home</a>
+{% endblock topnavbar %}
+
+{% block content %}
+<h1>Lets get Registered!</h1>
+<p>Please enter a suitable username and password to register.</p>
+
+<form method="post" action="">
+<table>
+    {{ form.as_table }}
+    <tr>
+        <td>&nbsp;</td>
+        <td><input type="submit" value="Register"></td>
+    </tr>
+</table>    
+<input type="hidden" name="next" value="{{ next }}" />
+{% csrf_token %}
+</form>
+
+{% endblock content %}

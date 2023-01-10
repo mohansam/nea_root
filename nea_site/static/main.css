@@ -1,0 +1,166 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'Avenir';
+    src: url('../fonts/Avenir.eot?#iefix') format('embedded-opentype'),  url('../fonts/Avenir.woff') format('woff'), url('../fonts/Avenir.ttf')  format('truetype'), url('../fonts/Avenir.svg#Avenir') format('svg');
+  }
+#header {
+    border-style: none;
+    
+    width: 700px;
+    height: auto;
+}
+
+#wrapper {
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(235, 238, 234);
+    width: auto;
+}
+body {
+    background-color: currentColor;
+    font-family: 'Avenir', Helvetica, sans-serif;
+    
+    font-size: 1.1em;
+    text-align: justify;
+    color: #fbfbfb;
+}
+
+#footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #daa520;
+    border-top: thin solid #BBBBBB;
+    clear: both;
+    color: #9696;
+}
+
+.topnavbar {
+    background-color: #388087;
+    overflow: hidden;
+}
+
+.topnavbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnavbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnavbar a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+#main {
+    width: 640px;
+    float: left;
+    margin-left: 20px;
+    margin-right: 10px;
+    padding-right: 10px;
+    color: #6FB3B8;
+}
+
+#logo {
+    padding: 10px;
+}
+
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+.errorlist li {
+    border: 1px solid red;
+    color: red;
+    background: rgba(255, 0, 0, 0.15);
+    list-style-position: inside;
+    display: block;
+    font-size: 1.2em;
+    margin: 0 0 3px;
+    padding: 4px 5px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 5px!important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(169, 169, 169);
+}
+
+input {
+    height: 30px;
+}
+.success {
+    background-color: rgba(0, 128, 0, 0.15);
+    padding: 10px;
+    text-align: center;
+    color: green;
+    border: 1px solid green;
+    border-radius: 3px;
+}
+
+.required label:after {
+    content: "*";
+}
+
+.btn-academic {
+    text-align: center;
+    position: relative;
+    top: 300px;
+}
+
+.btn-academic button {
+    background-color: #6FB3B8; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+}
+  
+.btn-academic button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+  
+/* Clear floats (clearfix hack) */
+.btn-academic:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+  
+/* Add a background color on hover */
+.btn-academic button:hover {
+    background-color: #3e8e41;
+}
+
+.btn-home button {
+    background-color: #6FB3B8; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    text-align: center;
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    display: block;
+    text-decoration: none;
+}
+
+
+.btn-home button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}

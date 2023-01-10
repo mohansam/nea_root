@@ -1,0 +1,1 @@
+web: gunicorn nea_site.wsgi --log-file -

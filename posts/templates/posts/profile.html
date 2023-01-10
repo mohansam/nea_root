@@ -1,0 +1,97 @@
+<!-- profile is the variable that you’re passing in your context dictionary to render() in profile(). It holds the information that you pulled from your database about a user profile. -->
+<!-- .follows gives you access to the ManyRelatedManager object, which holds all the user profiles that the current profile follows. -->
+<!-- .all fetches all those user profile instances and allows you to iterate over them. -->
+
+<!-- Namespace: The namespace 'dwitter:profile' allows Django to redirect to profile() in views.py. -->
+<!-- Argument: The argument, which is either following.id or follower.id in these examples, will be passed on to profile(), which uses it to pull the user profile from the database. -->
+
+
+{% extends 'posts_base.html' %}
+
+{% block content %}
+
+<div class="column">
+
+    <div class="block">
+    <h1 class="title is-1">
+        {{profile.user.username|upper}}'s Posts
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="buttons has-addons">
+        {% if profile in user.posts_profile.follows.all %}
+            <button class="button is-success is-static">Follow</button>
+            <button class="button is-danger" name="follow" value="unfollow">
+                Unfollow
+            </button>
+        {% else %}
+            <button class="button is-success" name="follow" value="follow">
+                Follow
+            </button>
+            <button class="button is-danger is-static">Unfollow</button>
+        {% endif %}
+        </div>
+    </form>
+    </div>
+
+    <div class="content">
+        {% for post in profile.user.posts.all %}
+            <div class="box">
+                {{ post.body }}
+                <span class="is-small has-text-grey-light">
+                    ({{ post.created_at }})
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<div class="column is-one-third">
+
+    <div class="block">
+        <a href="{% url 'posts:profile_list' %}">
+            <button class="button is-dark is-outlined is-fullwidth">
+                All Profiles
+            </button>
+        </a>
+    </div>
+
+    <div class="block">
+        <h3 class="title is-4">
+            {{profile.user.username}} follows:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for following in profile.follows.all %}
+                <li>
+                    <a href="{% url 'posts:profile' following.id %}">
+                        {{ following }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="block">
+        <h3 class="title is-4">
+            {{profile.user.username}} is followed by:
+        </h3>
+        <div class="content">
+            <ul>
+            {% for follower in profile.followed_by.all %}
+                <li>
+                    <a href="{% url 'posts:profile' follower.id %}">
+                        {{ follower }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

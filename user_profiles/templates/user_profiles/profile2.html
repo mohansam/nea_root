@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock title %}
+
+{% block content %}
+    <div class="row my-3 p-3">
+        <img class="rounded-circle account-img" src="{{ user.profile2.avatar.url }} " style="cursor: pointer;"/>
+    </div>
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="form-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="small mb-1">Username:</label>
+                            {{ user_form.username }}
+                        <label class="small mb-1">Email:</label>
+                            {{ user_form.email }}
+                        
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'password_change' %}">Change Password</a>
+                        <hr>
+                        <br>
+                        <label class="small mb-1">Change Avatar:</label>
+                        {{ profile_form.avatar }}
+    
+                    <label class="small mb-1">Firstname:</label> {{ profile_form.firstname }}
+                    <label class="small mb-1">Lastname:</label> {{ profile_form.lastname }}
+                    <label class="small mb-1">Year Group:</label> {{ profile_form.year_group }}
+                    <hr>
+                    <br>
+                    <label class="small mb-1">Subject 1:</label> {{ profile_form.subject1 }}
+                    <label class="small mb-1">Subject 2:</label> {{ profile_form.subject2 }}
+                    <label class="small mb-1">Subject 3:</label> {{ profile_form.subject3 }}
+                    <label class="small mb-1">Subject 4:</label> {{ profile_form.subject4 }}
+                    <hr>
+                    <br>
+                    <label class="small mb-1">Target Grade 1:</label> {{ profile_form.target1 }}
+                    <label class="small mb-1">Target Grade 2:</label> {{ profile_form.target2 }}
+                    <label class="small mb-1">Target Grade 3:</label> {{ profile_form.target3 }}
+                    <label class="small mb-1">Target Grade 4:</label> {{ profile_form.target4 }}
+
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <!--<button type="reset" class="btn btn-dark btn-lg">Reset</button>-->
+        </form>
+    </div>
+{% endblock content %}
