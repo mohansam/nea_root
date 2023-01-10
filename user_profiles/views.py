@@ -20,7 +20,7 @@ from django.views.generic.edit import CreateView
 # The UserCreationForm automatically hashes the password, 
 # and also uses two password fields that look if the passwords match, 
 # and presents the passwords as a password field.
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -55,6 +55,10 @@ def profile(request):
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    form_class=PasswordChangeForm
     template_name = 'user_profiles/change_password.html'
     success_message = "Successfully Changed Your Password"
-    success_url = reverse_lazy('user_profiles-home')
+    success_url = reverse_lazy('password_success')
+
+def change_password_success(request):
+    return render(request,'user_profiles/change_password_success.html',{})

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import TemplateView
-from user_profiles.views import Register, ChangePasswordView
+from user_profiles.views import Register, ChangePasswordView,change_password_success
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -34,7 +34,8 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('posts/', include('posts.urls')),
     path('', include('pages.urls')),
-    path('password-change/', ChangePasswordView.as_view(), name='password_change')
+    path('password-change/', ChangePasswordView.as_view(), name='password_change'),
+      path('password-success/', change_password_success, name='password_success')
 ]
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
