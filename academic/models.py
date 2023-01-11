@@ -92,6 +92,7 @@ TEST_YEAR_CHOICES = (
 class Tests(models.Model):
     test_subject = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
     test_title = models.CharField(max_length=100)
+    test_given_date= models.DateTimeField()
     date = models.CharField(max_length=4, choices=DATE_CHOICES)
     month = models.CharField(max_length=4, choices=MONTH_CHOICES)
     year = models.CharField(max_length=4, choices=TEST_YEAR_CHOICES)
