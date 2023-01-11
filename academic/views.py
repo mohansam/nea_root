@@ -39,19 +39,20 @@ def add_results(request):
 def submitted_results(request):
     user_id=request.user.id
     test_list=Tests.objects.filter(username=user_id).order_by('-id')
-    #serialize_data=serialize("json", test_list_query_set,use_natural_foreign_keys=True)
-    #test_list_json=json.loads(serialize_data)
-    #return JsonResponse(test_list_json, status=200,safe=False)  
     return render(request, 'academic/submitted_results.html', {'test_list': test_list, 'page_list': Page.objects.all()})
 
 @login_required(login_url=reverse_lazy('login'))
 def view_results(request):
     user_id=request.user.id
-    test_list=Tests.objects.filter(username=user_id)
-    #serialize_data=serialize("json", test_list_query_set,use_natural_foreign_keys=True)
-    #test_list_json=json.loads(serialize_data)
-    #return JsonResponse(test_list_json, status=200,safe=False)  
-    for result in test_list:
-        print(result)
+    test_list=Tests.objects.filter(username=user_id).order_by('-id')
     return render(request, 'academic/submitted_results.html', {'test_list': test_list, 'page_list': Page.objects.all()})
+
+
+@login_required(login_url=reverse_lazy('login'))
+def get_results_between_date_range(request):
+    user_id=request.user.id
+    test_list_query_set=Tests.objects.filter(username=user_id).values_list('test_subject','test_title')
+    serialize_data=serialize("json", test_list_query_set)
+    test_list_json=json.loads(serialize_data)
+    return JsonResponse(test_list_json, status=200,safe=False)  
   

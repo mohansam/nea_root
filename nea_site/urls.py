@@ -30,6 +30,7 @@ urlpatterns = [
     path('user_profiles/', include('user_profiles.urls')),
     path('', include('django.contrib.auth.urls')),
     path('academic/', include('academic.urls')),
+    path('revision_resources/', include('revision.urls')),
     path('', include('cal.urls')),
     path('', views.homepage, name='homepage'),
     path('posts/', include('posts.urls')),

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Academic Performance - Add Results {% endblock title %}
+
+{% block topnavbar %}
+    {% for page in page_list %}
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+    {% endfor %}
+{% endblock topnavbar %}
+
+{% block content %}
+<h1>Resources</h1> 
+        {%   for resource in resources %}
+       <ul>{{resource}}</a></ul>
+        {% endfor %}
+{% endblock content %}
