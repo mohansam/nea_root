@@ -34,7 +34,7 @@ class Subjects(models.Model):
 
 
 class Tests(models.Model):
-    test_subject = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
+    test_subject =models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE)
     test_title = models.CharField(max_length=100)
     test_given_date= models.DateTimeField()
     test_marks = models.DecimalField(decimal_places=0, max_digits=4, default=0)
