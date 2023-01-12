@@ -11,7 +11,11 @@
 
 {% block content %}
 <h1>Enrolled Subjects</h1> 
-        {%   for subject in subjects %}
-       <ul><a href="topics/1">{{subject}}</a></ul>
-        {% endfor %}
+     {% if isSubjectUpdated %}
+     {%   for subject in subjects %}
+     <ul><a href='topics/{{subject.subject_id}}''>{{subject.subject_name}}</a></ul>
+     {% endfor %}
+     {% else %}
+      <h2>Please update your profile</h2> 
+    {% endif %}
 {% endblock content %}
