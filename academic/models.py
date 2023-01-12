@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 SUBJECT_CHOICES = (
     ('Economics', 'Economics'),
     ('Art', 'Art'),
@@ -23,13 +24,11 @@ SUBJECT_CHOICES = (
     ('Physical Education', 'Physical Education'),
 )
 
-GRADE_CHOICES = (
-    ('A*', 'A*'),
-    ('A', 'A'),
-    ('B', 'B'),
-    ('C', 'C'),
-    ('D', 'D'),
-)
+class Subjects(models.Model):
+    subject_name=models.CharField(max_length=20, choices=SUBJECT_CHOICES,unique=True)
+    
+    def __str__(self):
+        return str(self.subject_name)
 
 
 
