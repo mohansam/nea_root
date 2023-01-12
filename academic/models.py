@@ -32,7 +32,6 @@ class Subjects(models.Model):
 
 
 
-
 class Tests(models.Model):
     test_subject =models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE)
     test_title = models.CharField(max_length=100)
