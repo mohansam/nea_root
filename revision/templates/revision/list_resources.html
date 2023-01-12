@@ -11,7 +11,11 @@
 
 {% block content %}
 <h1>Resources</h1> 
+   {% if resources %}
         {%   for resource in resources %}
-       <ul>{{resource}}</a></ul>
+       <ul><a href={{resource.url}} target="_blank">{{resource.resource_name}}</a></ul>
         {% endfor %}
+    {% else %}
+        <h2>Please request your administrator to add resources</h2> 
+      {% endif %}
 {% endblock content %}

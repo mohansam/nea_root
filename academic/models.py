@@ -30,6 +30,12 @@ class Subjects(models.Model):
     def __str__(self):
         return str(self.subject_name)
 
+class Topics(models.Model):
+    subject=models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE)
+    topics_name=models.CharField(max_length=100)
+    resource_url=models.URLField()
+    resource_name=models.CharField(max_length=100)
+
 
 
 class Tests(models.Model):

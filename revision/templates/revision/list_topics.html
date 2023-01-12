@@ -11,7 +11,11 @@
 
 {% block content %}
 <h1>Sub topics</h1> 
+   {% if topics %}
         {%   for topic in topics %}
-       <ul><a href="resources/1">{{topic}}</a></ul>
+       <ul><a href='resources/{{topic}}'>{{topic}}</a></ul>
         {% endfor %}
+     {% else %}
+        <h2>Please request your administrator to add topics to Subject</h2> 
+      {% endif %}
 {% endblock content %}
