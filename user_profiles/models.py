@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from PIL import Image
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from academic.models import Subjects
 # Create your models here.
 
 SUBJECT_CHOICES = (
@@ -50,10 +50,10 @@ class Profile2(models.Model):
     lastname = models.CharField(max_length=100)
     year_group = models.CharField(max_length=10, choices=YEAR_CHOICES)
     # dob = [date, month, year] needs to be fixed!!!
-    subject1 = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
-    subject2 = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
-    subject3 = models.CharField(max_length=20, choices=SUBJECT_CHOICES)
-    subject4 = models.CharField(max_length=20, choices=SUBJECT_CHOICES, blank=True)
+    subject1 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject1')
+    subject2 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject2')
+    subject3 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject3')
+    subject4 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject4')
     target1 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
     target2 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
     target3 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
