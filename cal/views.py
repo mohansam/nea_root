@@ -10,21 +10,23 @@ from django.urls import reverse,reverse_lazy
 from django.utils.safestring import mark_safe
 import calendar
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .models import *
 from .utils import Calendar
 from .forms import EventForm
 
 
-
+@method_decorator(login_required(login_url=reverse_lazy('login')),name='dispatch')
 class CalendarView(generic.ListView):
     model = Event
     template_name = 'cal/calendar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user_id=self.request.user.id
         d = get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth(withyear=True,user_id=user_id)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
