@@ -2,30 +2,23 @@
 
 {%block scripts%}
 <script  type='text/javascript'>
-   
-$(document).ready(function(){
-    var config = {
-    type: 'line',
+
+$(document).ready(async()=>{
+    
+ const {labels,datasets}=await getSourceData();
+  const DATA_COUNT = 5;
+const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+ const config = {
+    type: 'doughnut',
     data: {
-      labels: ["June", "July", "August", "September", "October", "November", "December"],
-      datasets: [{
-        label: "company1",
-        data: [1, 1, 2, 3, 4, 5, 6],
-        fill: false,
-        borderColor: "purple",
-        backgroundColor: "purple"
-      }, {
-        label: "company2",
-        data: [1, 2, 4, 8, 3, 2, 4],
-        fill: false,
-        borderColor: "green",
-        backgroundColor: "green"
-      }]
-    },
+  labels: labels,
+  datasets: datasets
+},
     options: {
       responsive: true,
     }
   };
+  console.log(labels,datasets);
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart=new Chart(ctx, config);
   
@@ -36,7 +29,12 @@ $(document).ready(function(){
   $("#bar").click(function() {
     change('bar');
   });
-  
+  $("#pie").click(function() {
+    change('pie');
+  });
+  $("#doughnut").click(function() {
+    change('doughnut');
+  });
   function change(newType) {
     var ctx = document.getElementById('myChart').getContext('2d');
   
@@ -51,6 +49,32 @@ $(document).ready(function(){
     myChart = new Chart(ctx, temp);
   };
 
+
+async function getSourceData(){
+  const res= await fetch('https://jsonplaceholder.typicode.com/todos/');
+  const resJson=await res.json();
+  const tempObj={};
+  resJson.forEach(item=>{if(!tempObj[item.userId]){tempObj[item.userId]=0;}tempObj[item.userId]++});
+  const labels=Object.keys(tempObj);
+  const data=Object.values(tempObj);
+  const backgroundColor=[];
+  const borderColor=[];
+  for(let i=0;i<labels.length;i++){
+    backgroundColor.push(getRandomColor());
+    borderColor.push(getRandomColor());
+  }
+  const datasets= [{data: data,backgroundColor, fill: false,}]
+  return {labels,datasets};
+}
+function getRandomColor() {
+    let letters = '0123456789ABCDEF'.split('');
+    let color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 });
 </script>
 {%endblock scripts%}
@@ -59,6 +83,8 @@ $(document).ready(function(){
 <label for="SelectChartType">SelectChartType</label>
 <button id='line'>line</button>
 <button id='bar'>bar</button>
+<button id='pie'>pie</button>
+<button id='doughnut'>doughnut</button>
 <label for="selectDuration">selectDuration</label>
 <input type="date" id="startDuration" name="startDuration">
 <input type="date" id="startDuration" name="startDuration">
