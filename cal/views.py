@@ -6,16 +6,15 @@ from datetime import datetime, timedelta, date
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.utils.safestring import mark_safe
 import calendar
-
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .utils import Calendar
 from .forms import EventForm
 
-def index(request):
-    return HttpResponse('hello')
+
 
 class CalendarView(generic.ListView):
     model = Event
@@ -50,6 +49,7 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+@login_required(login_url=reverse_lazy('login'))
 def event(request, event_id=None):
     instance = Event()
     if event_id:
