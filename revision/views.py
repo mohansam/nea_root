@@ -31,6 +31,7 @@ def list_topics(request,subject_id):
     topics_by_subject=Topics.objects.filter(subject_id=subject_id)
     for topic in topics_by_subject:
          topics.append(topic.topics_name)    
+    topics=list(set(topics))
     return render(request, 'revision/list_topics.html', {'topics':topics})
 
 
