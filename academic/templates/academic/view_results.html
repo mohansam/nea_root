@@ -1,33 +1,69 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html'%}
 
-{% block title %}Academic Performance - Add Results {% endblock title %}
+{%block scripts%}
+<script  type='text/javascript'>
+   
+$(document).ready(function(){
+    var config = {
+    type: 'line',
+    data: {
+      labels: ["June", "July", "August", "September", "October", "November", "December"],
+      datasets: [{
+        label: "company1",
+        data: [1, 1, 2, 3, 4, 5, 6],
+        fill: false,
+        borderColor: "purple",
+        backgroundColor: "purple"
+      }, {
+        label: "company2",
+        data: [1, 2, 4, 8, 3, 2, 4],
+        fill: false,
+        borderColor: "green",
+        backgroundColor: "green"
+      }]
+    },
+    options: {
+      responsive: true,
+    }
+  };
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart=new Chart(ctx, config);
+  
+  $("#line").click(function() {
+    change('line');
+  });
+  
+  $("#bar").click(function() {
+    change('bar');
+  });
+  
+  function change(newType) {
+    var ctx = document.getElementById('myChart').getContext('2d');
+  
+    // Remove the old chart and all its event handles
+    if (myChart) {
+      myChart.destroy();
+    }
+  
+    // Chart.js modifies the object you pass in. Pass a copy of the object so we can use the original object later
+    var temp = jQuery.extend(true, {}, config);
+    temp.type = newType;
+    myChart = new Chart(ctx, temp);
+  };
 
-{% block topnavbar %}
-    {% for page in page_list %}
-        <a href="{{ page.permalink }}">{{ page.title }}</a>
-    {% endfor %}
-{% endblock topnavbar %}
+});
+</script>
+{%endblock scripts%}
 
-{% block content %}
-<h1>Adding Results</h1>
-
-{% if submitted %}
-    <p class="success">
-        <img src="{% static 'greentick.jpg' %}" alt=""/>
-        <h1>The test results were submitted successfully. Cheers!</h1>
-    </p>
-
-{% else %}
-    <form action="" method="post" novalidate>
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" value="Submit"></td>
-        </tr>
-    </table>
-    {% csrf_token %}
-    </form>
-{% endif %}
-{% endblock content %}
+{%block content%}
+<label for="SelectChartType">SelectChartType</label>
+<button id='line'>line</button>
+<button id='bar'>bar</button>
+<label for="selectDuration">selectDuration</label>
+<input type="date" id="startDuration" name="startDuration">
+<input type="date" id="startDuration" name="startDuration">
+<button id='getNewData'>Submit</button>
+<!-- displaying the chart -->
+<!-- you can also play around with the width and height to increase or decrease the chart size -->
+<canvas id="myChart" width="200" height="100"></canvas>  
+{%endblock content%}

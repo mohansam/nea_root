@@ -10,6 +10,10 @@
     {% endblock title %}
 </title>
 <link href ="{% static 'main.css' %}" rel ="stylesheet" type = "text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -37,6 +41,8 @@
     </div>
 
     <section id="main">
+        {%block scripts%}
+        {%endblock scripts%}
         {% block content %}
             <h1>Cool. What page might this be?</h1>
             <p>This is the site template apparently</p>
