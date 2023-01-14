@@ -1,11 +1,6 @@
-{% extends 'base.html'%}
-
-{%block scripts%}
-<script  type='text/javascript'>
-
-$(document).ready(async()=>{
-  const {labels,datasets}=await getSourceData();
-drawChart('polarArea',labels,datasets);
+const {labels,datasets}=await getSourceData();
+drawChart('doughnut',labels,datasets);
+let myChart;
   $("#line").click(function() {
     drawChart('line',labels,datasets);
   });
@@ -22,10 +17,9 @@ drawChart('polarArea',labels,datasets);
   $("getNewData").click(async()=>{
     const {labels,datasets}=await getSourceData();
     drawChart('doughnut',labels,datasets);
-  });
-  var myChart;
+  })
   function drawChart(chartType,labels,datasets) {
-      if (myChart) {
+    if (myChart) {
         myChart.destroy();
       }  
     const config = {
@@ -55,7 +49,7 @@ async function getSourceData(){
     backgroundColor.push(getRandomColor());
     borderColor.push(getRandomColor());
   }
-  const datasets= [{data: data,backgroundColor, label: 'Subject wise Results',fill: false,}]
+  const datasets= [{data: data,backgroundColor, fill: false,}]
   return {labels,datasets};
 }
 function getRandomColor() {
@@ -66,21 +60,3 @@ function getRandomColor() {
     }
     return color;
 }
-});
-</script>
-{%endblock scripts%}
-
-{%block content%}
-<label for="SelectChartType">SelectChartType</label>
-<button id='line'>line</button>
-<button id='bar'>bar</button>
-<button id='pie'>pie</button>
-<button id='doughnut'>doughnut</button>
-<label for="selectDuration">selectDuration</label>
-<input type="date" id="startDuration" name="startDuration">
-<input type="date" id="startDuration" name="startDuration">
-<button id='getNewData'>Submit</button>
-<!-- displaying the chart -->
-<!-- you can also play around with the width and height to increase or decrease the chart size -->
-<canvas id="myChart" width="200" height="100"></canvas>  
-{%endblock content%}

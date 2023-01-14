@@ -53,8 +53,17 @@ def view_results(request):
 @login_required(login_url=reverse_lazy('login'))
 def get_results_between_date_range(request):
     user_id=request.user.id
-    test_list_query_set=Tests.objects.filter(username=user_id).values_list('test_subject','test_title')
-    serialize_data=serialize("json", test_list_query_set)
-    test_list_json=json.loads(serialize_data)
-    return JsonResponse(test_list_json, status=200,safe=False)  
+    test_list_query_set=Tests.objects.filter(username=user_id)
+    result_tracker_dict={}
+    subject_percentage_dict={}
+    for test_list in test_list_query_set:
+           subject_name=test_list.test_subject.subject_name
+           if  subject_name not in result_tracker_dict:
+              result_tracker_dict[subject_name]={'test_marks':0,'test_outof':0}
+           result_tracker_dict[subject_name]['test_marks']+=int(test_list.test_marks)
+           result_tracker_dict[subject_name]['test_outof']+=int(test_list.test_outof)
+    for subject_key in result_tracker_dict:
+        subject_percentage_dict[subject_key]=(result_tracker_dict[subject_key]['test_marks']/result_tracker_dict[subject_key]['test_outof'])*100
+    test_list_json=json.dumps(subject_percentage_dict)
+    return JsonResponse(json.loads(test_list_json), status=200,safe=False)  
   
