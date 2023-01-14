@@ -9,6 +9,7 @@ import json
 from .models import Tests
 from .forms import TestsForm
 from pages.models import Page
+import datetime
 
 
 from django.urls import reverse_lazy
@@ -53,7 +54,14 @@ def view_results(request):
 @login_required(login_url=reverse_lazy('login'))
 def get_results_between_date_range(request):
     user_id=request.user.id
-    test_list_query_set=Tests.objects.filter(username=user_id)
+    start_duration=request.GET['startDuration']
+    end_duration=request.GET['endDuration']
+    try:
+        datetime.datetime.strptime(start_duration, '%Y-%m-%d')
+        datetime.datetime.strptime(end_duration, '%Y-%m-%d')
+        test_list_query_set=Tests.objects.filter(username=user_id,test_given_date__gte=start_duration,test_given_date__lt=end_duration)
+    except ValueError:
+        test_list_query_set=Tests.objects.filter(username=user_id)
     result_tracker_dict={}
     subject_percentage_dict={}
     for test_list in test_list_query_set:

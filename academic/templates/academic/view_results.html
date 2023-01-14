@@ -1,11 +1,11 @@
 {% extends 'base.html'%}
-
+{% block title %}Academic Performance - View Results {% endblock title %}
 {%block scripts%}
 <script  type='text/javascript'>
 
 $(document).ready(async()=>{
   const {labels,datasets}=await getSourceData();
-drawChart('polarArea',labels,datasets);
+drawChart('pie',labels,datasets);
   $("#line").click(function() {
     drawChart('line',labels,datasets);
   });
@@ -19,8 +19,10 @@ drawChart('polarArea',labels,datasets);
   $("#doughnut").click(function() {
     drawChart('doughnut',labels,datasets);
   });
-  $("getNewData").click(async()=>{
-    const {labels,datasets}=await getSourceData();
+  $("#getNewData").click(async()=>{
+   const startDuration= document.getElementById('startDuration').value;
+   const endDuration= document.getElementById('endDuration').value;
+    const {labels,datasets}=await getSourceData(startDuration,endDuration);
     drawChart('doughnut',labels,datasets);
   });
   var myChart;
@@ -43,8 +45,9 @@ drawChart('polarArea',labels,datasets);
   };
 
 
-async function getSourceData(){
-  const destinationUrl=`${location.origin}/academic/get_results_between_date_range`;
+async function getSourceData(startDuration,endDuration){
+  const destinationUrl= new URL(`${location.origin}/academic/get_results_between_date_range`);
+  destinationUrl.search= new URLSearchParams({startDuration,endDuration}).toString();
   const res= await fetch(destinationUrl);
   const resJson=await res.json();
   const labels=Object.keys(resJson);
@@ -78,7 +81,7 @@ function getRandomColor() {
 <button id='doughnut'>doughnut</button>
 <label for="selectDuration">selectDuration</label>
 <input type="date" id="startDuration" name="startDuration">
-<input type="date" id="startDuration" name="startDuration">
+<input type="date" id="endDuration" name="endDuration">
 <button id='getNewData'>Submit</button>
 <!-- displaying the chart -->
 <!-- you can also play around with the width and height to increase or decrease the chart size -->
