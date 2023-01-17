@@ -8,14 +8,26 @@
         <a href="{{ page.permalink }}">{{ page.title }}</a>
     {% endfor %}
 {% endblock topnavbar %}
-
+{%block scripts%}
+<script  type='text/javascript'>
+      $(function(){
+    $("#subTopics").dataTable();
+  })
+</script>
+{%endblock scripts%}
 {% block content %}
-<h1>Sub topics</h1> 
-   {% if topics %}
+<table id="subTopics">
+    <thead>
+      <tr><th>Sub topics</th></tr>
+    </thead>
+    <tbody>
+        {% if topics %}
         {%   for topic in topics %}
-       <ul><a href='resources/{{topic}}'>{{topic}}</a></ul>
+        <tr><td> <ul><a href='resources/{{topic}}'>{{topic}}</a></ul></td></tr>
         {% endfor %}
      {% else %}
         <h2>Please request your administrator to add topics to Subject</h2> 
       {% endif %}
+    </tbody>
+  </table>
 {% endblock content %}
