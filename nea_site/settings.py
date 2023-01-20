@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'user_profiles.apps.UserProfilesConfig',
     'academic.apps.AcademicConfig',
     'revision.apps.RevisionConfig',
+    'notes.apps.NotesConfig',
     'cal.apps.CalConfig',
     'posts.apps.PostsConfig',
     'django.contrib.admin',

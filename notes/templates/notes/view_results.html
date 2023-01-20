@@ -1,0 +1,95 @@
+{% extends 'base.html'%}
+{% block title %}Academic Performance - View Results {% endblock title %}
+{%block scripts%}
+<script  type='text/javascript'>
+
+$(document).ready(async()=>{
+const res=await getSourceData();
+let  labels=res.labels;
+let datasets=res.datasets;
+drawChart('pie');
+  $("#line").click(function() {
+    drawChart('line',labels,datasets);
+  });
+  
+  $("#bar").click(function() {
+    drawChart('bar',labels,datasets);
+  });
+  $("#pie").click(function() {
+    drawChart('pie',labels,datasets);
+  });
+  $("#doughnut").click(function() {
+    drawChart('doughnut',labels,datasets);
+  });
+  $("#getNewData").click(async()=>{
+    const startDuration= document.getElementById('startDuration').value;
+    const endDuration= document.getElementById('endDuration').value;
+    const res=await getSourceData(startDuration,endDuration);
+    labels=res.labels;
+    datasets=res.datasets;
+    drawChart('doughnut');
+  });
+  var myChart;
+  var config={}
+  function drawChart(chartType) {
+      if (myChart) {
+        myChart.destroy();
+        config={}
+      }  
+    config = {
+        type: chartType,
+        data: {
+      labels: labels,
+      datasets: datasets
+    },
+        options: {
+          responsive: true,
+        }
+      };
+    const ctx = document.getElementById('myChart').getContext('2d');
+    myChart = new Chart(ctx, config);
+  };
+
+
+async function getSourceData(startDuration,endDuration){
+  const destinationUrl= new URL(`${location.origin}/academic/get_results_between_date_range`);
+  destinationUrl.search= new URLSearchParams({startDuration,endDuration}).toString();
+  const res= await fetch(destinationUrl);
+  const resJson=await res.json();
+  const labels=Object.keys(resJson);
+  const data=Object.values(resJson);
+  const backgroundColor=[];
+  const borderColor=[];
+  for(let i=0;i<labels.length;i++){
+    backgroundColor.push(getRandomColor());
+    borderColor.push(getRandomColor());
+  }
+  const datasets= [{data: data,backgroundColor, label: 'Subject wise Results',fill: false,}]
+  return {labels,datasets};
+}
+function getRandomColor() {
+    let letters = '0123456789ABCDEF'.split('');
+    let color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+});
+</script>
+{%endblock scripts%}
+
+{%block content%}
+<label for="SelectChartType">SelectChartType</label>
+<button id='line'>line</button>
+<button id='bar'>bar</button>
+<button id='pie'>pie</button>
+<button id='doughnut'>doughnut</button>
+<label for="selectDuration">selectDuration</label>
+<input type="date" id="startDuration" name="startDuration">
+<input type="date" id="endDuration" name="endDuration">
+<button id='getNewData'>Submit</button>
+<!-- displaying the chart -->
+<!-- you can also play around with the width and height to increase or decrease the chart size -->
+<canvas id="myChart" width="200" height="100"></canvas>  
+{%endblock content%}
