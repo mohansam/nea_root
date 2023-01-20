@@ -20,15 +20,20 @@ def add_notes(request):
     if request.method == 'POST':
         form = NotesForm(request.POST)
         if form.is_valid():
-            tests = form.save(commit=False)
+            notes = form.save(commit=False)
             try:
-                tests.username = request.user
+                notes.username = request.user
             except Exception:
                 pass
-            tests.save()
-            return HttpResponseRedirect('/academic/submitted_results/')
+            notes.save()
+            return HttpResponseRedirect('/notes/view_notes/')
     else:    
       form = NotesForm()
     return render(request, 'notes/add_notes.html', {'form': form})
 
+@login_required(login_url=reverse_lazy('login'))
+def view_notes(request):
+    user_id=request.user.id
+    all_notes=Notes.objects.filter(username=user_id).order_by('-id')
+    return render(request, 'notes/view_notes.html', {'all_notes': all_notes})
   
