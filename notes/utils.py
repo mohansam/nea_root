@@ -1,5 +1,3 @@
-from cryptography.fernet import Fernet
-import base64
 from nea_site.settings import ENCRYPT_KEY
 
 # source https://stackoverflow.com/questions/5131227/custom-python-encryption-algorithm
