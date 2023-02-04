@@ -27,6 +27,7 @@ ENCRYPT_KEY='lL7v76Xt95beECtuWHIKgGfK72MUut3z6cxzR2gWHZM='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CIRCULAR_QUEUE_SIZE=20
 ALLOWED_HOSTS = ["*"]
 
 
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   'nea_site.middleware.circular_queue_logger.CircularQueueMiddleware'
 ]
 
 ROOT_URLCONF = 'nea_site.urls'
