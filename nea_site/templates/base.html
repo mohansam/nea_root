@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
@@ -40,14 +41,14 @@
         <a href="/need_help">Need Help?</a>
         <a href="/user_profiles/profile/">Your Profile</a>
     </div>
-    <section id="main">
+    <div id="main">
         {%block scripts%}
         {%endblock scripts%}
         {% block content %}
             <h1>Cool. What page might this be?</h1>
             <p>This is the site template apparently</p>
         {% endblock content %}
-    </section>
+    </div>
     <footer id="footer">Yogi Ramsuratkumar Jaya Guru Raaya!</footer>
 </div>
 </body>
