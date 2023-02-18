@@ -19,30 +19,59 @@
     display:flex
 }
 .header-logo{
-    display: inline-block;
-    width: auto;
+    display:flex;
     height: 100px;
+    width: 150px;
+    vertical-align: top;
 }
 .header-logo-image{
-    vertical-align: middle;
     width: 120px;
+    height: 80px;
+    border-radius: 130px;
+    margin-top: 10px;
+}
+.user-profile-image{
+    width: 120px;
+    height: 100px;
+    display: block;
     border-radius: 150px;
 }
 .header-top-banner{
-    display: inline-block;
+    display: flex;
     width: auto;
     height: 100px;
     vertical-align: top;
+    align-content: center;
 }
 .top-banner-image{
-    vertical-align: top;
     height: 100px;
 }
 .user-login-status{
     color: #353942;
-    display: inline-block;
+    display: flex;
     width: auto;
-    vertical-align: top;
+}
+.user-name{
+    display: flex;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    clear: both;
+    color: black;
+}
+.user-logout-url{
+    display: flex;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    clear: both;
+    color: black;
 }
 #footer {
     text-align: center;
@@ -50,18 +79,19 @@
     margin-top: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #daa520;
+    background-color: #daa820dc;
     border-top: thin solid #BBBBBB;
     clear: both;
-    color: #9696;
+    color: black;
 }
 
-.topnavbar {
+
+#topnavbar {
     background-color: #388087;
     overflow: hidden;
 }
 
-.topnavbar a {
+#topnavbar a {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -70,18 +100,18 @@
     font-size: 17px;
 }
 
-.topnavbar a:hover {
+#topnavbar a:hover {
     background-color: #ddd;
     color: black;
 }
 
-.topnavbar a.active {
+#topnavbar a.active {
     background-color: #04AA6D;
     color: white;
 }
 
 #main {
-    width: 640px;
+    width: 100%;
     float: left;
     margin-left: 20px;
     margin-right: 10px;

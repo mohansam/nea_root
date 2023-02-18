@@ -51,6 +51,7 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
 @login_required(login_url=reverse_lazy('login'))
 def event(request, event_id=None):
     instance = Event()

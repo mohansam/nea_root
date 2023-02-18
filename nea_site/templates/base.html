@@ -6,10 +6,10 @@
 <meta charset="utf-8">
 <title>
     {% block title %}
-    No clue what this page could be
     {% endblock title %}
 </title>
 <link href ="{% static 'main.css' %}" rel ="stylesheet" type = "text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'cal/css/styles.css' %}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
@@ -26,30 +26,24 @@
         <div class="header-top-banner"><img class="top-banner-image" src="{% static 'top_banner.png' %}" width="700" height="150" title="I'm the top banner" alt=""/></div>
         <div class="user-login-status">
             {% if user.is_authenticated %}
-             Hello, {{ user.username }}. <a href="{% url 'logout' %}?next=/">Log out</a>.
-            {% else %}
-             Not logged in. <a href="{% url 'login' %}?next=/">Log in</a>. 
+            <img class="user-profile-image" src="{{ user.profile2.avatar.url }} "/>
+            <div class="user-name">  <h1>{{ user.username }} </h1></div> 
+            <div class="user-logout-url"><a href="{% url 'logout' %}?next=/">LogOut</a></div>
             {% endif %}
         </div>
     </div>
-    <div class="topnavbar">
+    <div id="topnavbar">
         <a class = "active" href="{% url 'homepage' %}">Home</a>
-        <!--{% block topnavbar %}
-        <a href="/posts">Posts</a>
-        {% endblock topnavbar %}-->
         <a href="{% url 'posts:mainscreen' %} ">Posts</a>
         <a href="/need_help">Need Help?</a>
         <a href="/user_profiles/profile/">Your Profile</a>
     </div>
     <div id="main">
-        {%block scripts%}
-        {%endblock scripts%}
         {% block content %}
-            <h1>Cool. What page might this be?</h1>
-            <p>This is the site template apparently</p>
         {% endblock content %}
+        {%block scripts%}
+        {%endblock scripts%}      
     </div>
-    <footer id="footer">Yogi Ramsuratkumar Jaya Guru Raaya!</footer>
 </div>
 </body>
 </html>
