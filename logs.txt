@@ -417,3 +417,23 @@ GET /fonts/Avenir.woff admin 404
 GET /fonts/Avenir.ttf admin 404
 GET /academic/ admin 200
 GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET /academic/view_results/ admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET / admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET /revision_resources/ admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET /revision_resources/topics/1 admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET /revision_resources/topics/resources/Resource Utilization admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET / admin 200
+GET /fonts/Avenir.woff admin 404
+GET /fonts/Avenir.ttf admin 404
+GET /posts/ admin 200
