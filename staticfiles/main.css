@@ -3,29 +3,47 @@
     font-family: 'Avenir';
     src: url('../fonts/Avenir.eot?#iefix') format('embedded-opentype'),  url('../fonts/Avenir.woff') format('woff'), url('../fonts/Avenir.ttf')  format('truetype'), url('../fonts/Avenir.svg#Avenir') format('svg');
   }
-#header {
-    border-style: none;
-    
-    width: 700px;
-    height: auto;
-}
 
-#wrapper {
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgb(235, 238, 234);
-    width: auto;
-}
-body {
+.wrapper {
     background-color: currentColor;
     font-family: 'Avenir', Helvetica, sans-serif;
-    
     font-size: 1.1em;
     text-align: justify;
     color: #fbfbfb;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
 }
-
+.header {
+    display:flex
+}
+.header-logo{
+    display: inline-block;
+    width: auto;
+    height: 100px;
+}
+.header-logo-image{
+    vertical-align: middle;
+    width: 120px;
+    border-radius: 150px;
+}
+.header-top-banner{
+    display: inline-block;
+    width: auto;
+    height: 100px;
+    vertical-align: top;
+}
+.top-banner-image{
+    vertical-align: top;
+    height: 100px;
+}
+.user-login-status{
+    color: #353942;
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+}
 #footer {
     text-align: center;
     font-size: 0.8em;

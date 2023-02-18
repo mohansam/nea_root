@@ -19,19 +19,18 @@
 </head>
 
 <body>
-<div id ="wrapper">
-    <header id="header">
-        <div id="logo"><img src="{% static 'logo.jpg' %}" alt=""/>
-            <span style="float: right;">
+<div class ="wrapper">
+    <div class="header">
+        <div class="header-logo"><img class="header-logo-image" src="{% static 'logo.jpg' %}" alt=""/></div>
+        <div class="header-top-banner"><img class="top-banner-image" src="{% static 'top_banner.png' %}" width="700" height="150" title="I'm the top banner" alt=""/></div>
+        <div class="user-login-status">
             {% if user.is_authenticated %}
              Hello, {{ user.username }}. <a href="{% url 'logout' %}?next=/">Log out</a>.
             {% else %}
              Not logged in. <a href="{% url 'login' %}?next=/">Log in</a>. 
             {% endif %}
-            </span>
         </div>
-        <div id="topbanner"><img src="{% static 'top_banner.png' %}" width="700" height="150" title="I'm the top banner" alt=""/></div>
-    </header>
+    </div>
     <div class="topnavbar">
         <a class = "active" href="{% url 'homepage' %}">Home</a>
         <!--{% block topnavbar %}
@@ -41,7 +40,6 @@
         <a href="/need_help">Need Help?</a>
         <a href="/user_profiles/profile/">Your Profile</a>
     </div>
-
     <section id="main">
         {%block scripts%}
         {%endblock scripts%}
