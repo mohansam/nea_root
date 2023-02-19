@@ -3,11 +3,50 @@
 {% block title %}Academic Performance{% endblock title %}
 
 {% block content %}
-<div class="btn-home">
-    <a href="/academic/" ><button>Academic Performance</button></a>
-    <a href="/revision_resources/" ><button>Revision Resources</button></a>
-    <a href="/calendar/" ><button>Calendar</button></a>
-    <a href="/notes/" ><button>Notes</button></a>
+<div class="columns">
+    <div class="column is-half">
+        <div class="block">
+            <a href="/academic/">
+                <button class="button is-success is-fullwidth">
+                    Academic Performance                
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/revision_resources/">
+                <button class="button is-success is-fullwidth">
+                    Revision Resources              
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/calendar/">
+                <button class="button is-success is-fullwidth">
+                    Calendar                
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/notes/">
+                <button class="button is-success is-fullwidth">
+                    Notes                
+                </button>
+            </a>
+        </div>   
+    </div>
+    <div class="column is-half">
+        <section>
+            <h1>Up coming Events</h1>
+        </section>
+        {% for event in events %}
+                <div class="box">
+                    {{ event.title }}
+                    <span class="is-small has-text-grey-light">
+                        (startTime {{ event.end_time }} EndTime {{ event.start_time }})
+                    </span>
+                </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock content %}
