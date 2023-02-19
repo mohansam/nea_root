@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from calendar import HTMLCalendar
+from django.db.models import Q
 from .models import Event
 
 class Calendar(HTMLCalendar):
@@ -11,7 +12,7 @@ class Calendar(HTMLCalendar):
 	# formats a day as a td
 	# filter events by day
 	def formatday(self, day, events):
-		events_per_day = events.filter(start_time__day=day)
+		events_per_day = events.filter(Q(start_time__day=day)|Q(end_time__day=day))
 		d = ''
 		for event in events_per_day:
 			d += f'<li> {event.get_html_url} </li>'
