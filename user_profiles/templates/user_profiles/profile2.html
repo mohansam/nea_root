@@ -3,6 +3,7 @@
 {% block title %}User Profile{% endblock title %}
 
 {% block content %}
+ <div class="column is-half">
     <div class="row my-3 p-3">
         <img class="user-profile-image" src="{{ user.profile2.avatar.url }} " style="cursor: pointer;"/>
     </div>
@@ -57,9 +58,11 @@
                 </div>
             </div>
             <br><br>
-            
-            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
-            <!--<button type="reset" class="btn btn-dark btn-lg">Reset</button>-->
+            <div class="has-text-centered">
+                <button type="submit" class="button is-success">Save Changes</button>
+            </div>     
         </form>
     </div>
+ </div>
+   
 {% endblock content %}
