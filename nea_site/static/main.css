@@ -105,7 +105,7 @@
     color: black;
 }
 
-#topnavbar a.active {
+.top-navbar-active {
     background-color: #04AA6D;
     color: white;
 }
