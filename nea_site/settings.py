@@ -30,6 +30,7 @@ DEBUG = True
 CIRCULAR_QUEUE_SIZE=20
 ALLOWED_HOSTS = ["*"]
 
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
 
