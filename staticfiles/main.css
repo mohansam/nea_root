@@ -21,8 +21,8 @@
 .header-logo{
     display:flex;
     height: 100px;
-    width: 150px;
     vertical-align: top;
+    margin-left: 5px;
 }
 .header-logo-image{
     width: 120px;
@@ -32,9 +32,10 @@
 }
 .user-profile-image{
     width: 120px;
-    height: 100px;
-    display: block;
+    height: 85px;
     border-radius: 150px;
+    vertical-align: top;
+    margin-top: 7px;
 }
 .header-top-banner{
     display: flex;
@@ -42,6 +43,8 @@
     height: 100px;
     vertical-align: top;
     align-content: center;
+    margin-right: 130px;
+    margin-left: 130px;
 }
 .top-banner-image{
     height: 100px;
