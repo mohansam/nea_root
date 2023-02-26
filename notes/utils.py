@@ -46,6 +46,8 @@ def fuzzy_text_search(query, corpus, threshold=0.5):
 
 
 def find_matching_notes(search_str,notes_list):
+    if(search_str==''):
+        return notes_list
     matched_list=[]
     for note in notes_list:
         match=fuzzy_text_search(search_str,note['body_text'],0.2)

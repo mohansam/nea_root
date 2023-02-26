@@ -8,24 +8,60 @@
         <a href="{{ page.permalink }}">{{ page.title }}</a>
     {% endfor %}
 {% endblock topnavbar %}
+{%block scripts%}
+<script  type='text/javascript'>
+  $(document).ready(async()=>{
+    const notesTable=$("#NotesTable").DataTable({
+    columns: [
+          { data: 'title' },
+          { data: 'body_text' },
+        ],
+    "paging": false,
+    "searching": false,
+    "info": false
+  } );
+    const data= await searchNotes('')
+    populateTable(data);
+    const inputSearchBox=document.querySelector("#NotesTable_filter > label > input[type=search]");
+    inputSearchBox.addEventListener('keyup',async(event)=>{
+     // listening for enter key
+      if (event.keyCode === 13) {
+        const data= await searchNotes(event.target.value)
+        populateTable(data);
+      }
+    })
+  function populateTable(data){
+    console.log(data);
+    console.log(notesTable);
+    notesTable.clear().rows.add(data).draw();
+  }
+  async function searchNotes(searchText){
+    const destinationUrl= new URL(`${location.origin}/notes/search_notes`);
+    destinationUrl.search= new URLSearchParams({searchText}).toString();
+    const res= await fetch(destinationUrl);
+    const resJson=await res.json();
+    return resJson;
+  }
+  });
+  </script>
+{%endblock scripts%}
 
 {% block content %}
 <h1>All Notes</h1> 
-    <table class="table is-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Body</th>  
-      </tr>
-      </thead>
-    <tbody>
-      {%   for notes in all_notes %}
+<div class="columns">
+  <div id="NotesTable_filter" class="column is-2">
+    <label>Search:<input type="search" class="" placeholder="" aria-controls="NotesTable"></label>
+  </div>
+</div>
+  <table id='NotesTable'class="table is-bordered">
+    <thead>
       <tr>
-        <td>{{ notes.title}}</td> 
-        <td>{{ notes.body_text}}</td>        
-      </tr>
-    {% endfor %}
-    </tbody>         
-     </table>
+        <th>Title</th>
+        <th>Body</th>  
+    </tr>
+    </thead>
+  <tbody>
+  </tbody>         
+   </table>
 {% endblock content %}
 
