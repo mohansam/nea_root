@@ -87,7 +87,9 @@
     clear: both;
     color: black;
 }
-
+.dataTables_wrapper{
+    width: 700px;
+}
 
 #topnavbar {
     background-color: #388087;

@@ -80,16 +80,18 @@ function getRandomColor() {
 {%endblock scripts%}
 
 {%block content%}
-<label for="SelectChartType">SelectChartType</label>
-<button id='line'>line</button>
-<button id='bar'>bar</button>
-<button id='pie'>pie</button>
-<button id='doughnut'>doughnut</button>
-<label for="selectDuration">selectDuration</label>
-<input type="date" id="startDuration" name="startDuration">
-<input type="date" id="endDuration" name="endDuration">
-<button id='getNewData'>Submit</button>
-<!-- displaying the chart -->
-<!-- you can also play around with the width and height to increase or decrease the chart size -->
-<canvas id="myChart" width="200" height="100"></canvas>  
+<div>
+  <label for="SelectChartType">SelectChartType</label>
+  <button id='line'>line</button>
+  <button id='bar'>bar</button>
+  <button id='pie'>pie</button>
+  <label for="selectDuration">selectDuration</label>
+  <input type="date" id="startDuration" name="startDuration">
+  <input type="date" id="endDuration" name="endDuration">
+  <button id='getNewData'>Submit</button>
+  <!-- displaying the chart -->
+  <!-- you can also play around with the width and height to increase or decrease the chart size -->
+  <canvas id="myChart" width="200" height="100"></canvas>  
+</div>
+
 {%endblock content%}

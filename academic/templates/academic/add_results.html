@@ -19,12 +19,12 @@
     </p>
 
 {% else %}
-    <form action="" method="post" novalidate>
-    <table>
+    <form class='control'action="" method="post" novalidate>
+    <table class="">
         {{ form.as_table }}
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Submit"></td>
+            <td><input type="submit" value="Submit" class="button is-success"></td>
         </tr>
     </table>
     {% csrf_token %}

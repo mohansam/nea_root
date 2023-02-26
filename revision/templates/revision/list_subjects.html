@@ -13,7 +13,11 @@
 <h1>Enrolled Subjects</h1> 
      {% if isSubjectUpdated %}
      {%   for subject in subjects %}
-     <ul><a href='topics/{{subject.subject_id}}''>{{subject.subject_name}}</a></ul>
+     <ul class="menu">
+        <li>
+            <a href='topics/{{subject.subject_id}}''>{{subject.subject_name}}</a>
+        </li>
+  </ul>
      {% endfor %}
      {% else %}
       <h2>Please update your profile</h2> 

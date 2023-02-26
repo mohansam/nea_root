@@ -11,12 +11,16 @@
 {%block scripts%}
 <script  type='text/javascript'>
       $(function(){
-    $("#subTopics").dataTable();
+    $("#subTopics").dataTable({
+    "paging": false,
+    "searching": true,
+    "info": false
+  } );
   })
 </script>
 {%endblock scripts%}
 {% block content %}
-<table id="subTopics">
+  <table id="subTopics" class="table is-bordered">
     <thead>
       <tr><th>Sub topics</th></tr>
     </thead>
@@ -30,4 +34,5 @@
       {% endif %}
     </tbody>
   </table>
+
 {% endblock content %}

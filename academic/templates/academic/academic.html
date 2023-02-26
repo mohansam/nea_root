@@ -3,11 +3,30 @@
 {% block title %}Academic Performance{% endblock title %}
 
 {% block content %}
-
-<div class="btn-home">
-    <a href="/academic/add_results" ><button>Add Results</button></a>
-    <a href="/academic/submitted_results" ><button>Submitted Results</button></a>
-    <a href="/academic/view_results" ><button>View Results</button></a>
+<div  class="columns">
+    <div class="column is-half">
+        <div class="block">
+            <a href="/academic/add_results">
+                <button class="button is-success is-fullwidth">
+                    Add Results          
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/academic/submitted_results">
+                <button class="button is-success is-fullwidth">
+                    Submitted Results            
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/academic/view_results">
+                <button class="button is-success is-fullwidth">
+                    View Results            
+                </button>
+            </a>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

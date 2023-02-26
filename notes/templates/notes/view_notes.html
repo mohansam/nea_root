@@ -11,17 +11,21 @@
 
 {% block content %}
 <h1>All Notes</h1> 
-    <table>
+    <table class="table is-bordered">
+      <thead>
         <tr>
-            <th>Title</th>
-            <th>Body</th>  
-        </tr>
-          {%   for notes in all_notes %}
-          <tr>
-            <td>{{ notes.title}}</td> 
-            <td>{{ notes.body_text}}</td>        
-          </tr>
-        {% endfor %}
+          <th>Title</th>
+          <th>Body</th>  
+      </tr>
+      </thead>
+    <tbody>
+      {%   for notes in all_notes %}
+      <tr>
+        <td>{{ notes.title}}</td> 
+        <td>{{ notes.body_text}}</td>        
+      </tr>
+    {% endfor %}
+    </tbody>         
      </table>
 {% endblock content %}
 

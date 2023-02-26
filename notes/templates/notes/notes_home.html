@@ -4,9 +4,23 @@
 
 {% block content %}
 
-<div class="btn-home">
-    <a href="/notes/add_notes" ><button>Add Notes</button></a>
-    <a href="/notes/view_notes" ><button>View Notes</button></a>
+<div  class="columns">
+    <div class="column is-half">
+        <div class="block">
+            <a href="/notes/add_notes">
+                <button class="button is-success is-fullwidth">
+                    Add Notes                
+                </button>
+            </a>
+        </div>
+        <div class="block">
+            <a href="/notes/view_notes">
+                <button class="button is-success is-fullwidth">
+                    View Notes            
+                </button>
+            </a>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
