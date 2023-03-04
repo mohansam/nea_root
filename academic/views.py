@@ -8,7 +8,6 @@ from django.core.serializers import serialize
 import json
 from .models import Tests
 from .forms import TestsForm
-from pages.models import Page
 import datetime
 
 
@@ -34,20 +33,18 @@ def add_results(request):
             return HttpResponseRedirect('/academic/submitted_results/')
     else:    
       form = TestsForm()
-      return render(request, 'academic/add_results.html', {'form': form, 'page_list': Page.objects.all()})
+      return render(request, 'academic/add_results.html', {'form': form})
 
 
 @login_required(login_url=reverse_lazy('login'))
 def submitted_results(request):
     user_id=request.user.id
     test_list=Tests.objects.filter(username=user_id).order_by('-id')
-    return render(request, 'academic/submitted_results.html', {'test_list': test_list, 'page_list': Page.objects.all()})
+    return render(request, 'academic/submitted_results.html', {'test_list': test_list})
 
 @login_required(login_url=reverse_lazy('login'))
 def view_results(request):
-    user_id=request.user.id
-    test_list=Tests.objects.filter(username=user_id).order_by('-id')
-    return render(request, 'academic/view_results.html', {'users':['sam','raj']})
+    return render(request, 'academic/view_results.html')
 
 
 

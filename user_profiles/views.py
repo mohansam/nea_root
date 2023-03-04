@@ -14,7 +14,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 
 from .models import Profile2
-from pages.models import Page
 
 from django.views.generic.edit import CreateView
 # The UserCreationForm automatically hashes the password, 
