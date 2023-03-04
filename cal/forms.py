@@ -1,5 +1,7 @@
 from django.forms import ModelForm, DateInput
+from django import forms
 from cal.models import Event
+from datetime import datetime
 
 class EventForm(ModelForm):
   class Meta:
@@ -16,3 +18,17 @@ class EventForm(ModelForm):
     # input_formats parses HTML5 datetime-local input to datetime field
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
+
+  def clean(self):
+        cleaned_data = super().clean()
+        start_datetime = cleaned_data.get('start_time')
+        end_datetime = cleaned_data.get('end_time')
+
+        if start_datetime and end_datetime:
+            if isinstance(start_datetime, datetime) and isinstance(end_datetime, datetime):
+                if end_datetime <= start_datetime:
+                  raise forms.ValidationError('End time should be greater than start time')
+            else:
+                raise forms.ValidationError('Both start and end datetime should be datetime objects')
+
+        return cleaned_data
