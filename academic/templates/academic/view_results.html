@@ -4,9 +4,9 @@
 <script  type='text/javascript'>
 
 $(document).ready(async()=>{
-const res=await getSourceData();
-let  labels=res.labels;
-let datasets=res.datasets;
+const response=await getSourceData();
+let  labels=response.labels;
+let datasets=response.datasets;
 drawChart('pie');
   $("#line").click(function() {
     drawChart('line',labels,datasets);
@@ -24,9 +24,9 @@ drawChart('pie');
   $("#getNewData").click(async()=>{
     const startDuration= document.getElementById('startDuration').value;
     const endDuration= document.getElementById('endDuration').value;
-    const res=await getSourceData(startDuration,endDuration);
-    labels=res.labels;
-    datasets=res.datasets;
+    const response=await getSourceData(startDuration,endDuration);
+    labels=response.labels;
+    datasets=response.datasets;
     drawChart('doughnut');
   });
   var myChart;
@@ -46,16 +46,16 @@ drawChart('pie');
           responsive: true,
         }
       };
-    const ctx = document.getElementById('myChart').getContext('2d');
-    myChart = new Chart(ctx, config);
+    const chartCanvas = document.getElementById('myChart').getContext('2d');
+    myChart = new Chart(chartCanvas, config);
   };
 
 
 async function getSourceData(startDuration,endDuration){
   const destinationUrl= new URL(`${location.origin}/academic/get_results_between_date_range`);
   destinationUrl.search= new URLSearchParams({startDuration,endDuration}).toString();
-  const res= await fetch(destinationUrl);
-  const resJson=await res.json();
+  const response= await fetch(destinationUrl);
+  const resJson=await response.json();
   const labels=Object.keys(resJson);
   const data=Object.values(resJson);
   const backgroundColor=[];

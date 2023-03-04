@@ -38,8 +38,8 @@
   async function searchNotes(searchText){
     const destinationUrl= new URL(`${location.origin}/notes/search_notes`);
     destinationUrl.search= new URLSearchParams({searchText}).toString();
-    const res= await fetch(destinationUrl);
-    const resJson=await res.json();
+    const response= await fetch(destinationUrl);
+    const resJson=await response.json();
     return resJson;
   }
   });
