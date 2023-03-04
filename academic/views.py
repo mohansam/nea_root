@@ -31,6 +31,7 @@ def add_results(request):
                 pass
             tests.save()
             return HttpResponseRedirect('/academic/submitted_results/')
+        return render(request, 'academic/add_results.html', {'form': form})        
     else:    
       form = TestsForm()
       return render(request, 'academic/add_results.html', {'form': form})

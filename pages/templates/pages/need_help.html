@@ -4,24 +4,6 @@
 
 {% block content %}
 
-<h1>Need Help? Just Contact us</h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rHux0gMZ3Eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-{% if submitted %}
-    <p>
-        Your request has been sent successfully. Thank you.
-    </p>
-
-{% else %}
-    <form action="" method="post" novalidate>
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" value="Submit"></td>
-        </tr>
-    </table>
-    {% csrf_token %}
-    </form>
-
-{% endif %}
 {% endblock content %}
