@@ -54,10 +54,6 @@ class Profile2(models.Model):
     subject2 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject2')
     subject3 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject3')
     subject4 = models.ForeignKey(Subjects, blank=True, null=True, on_delete=models.CASCADE,related_name='subject4')
-    target1 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
-    target2 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
-    target3 = models.CharField(max_length=4, choices=TARGET_CHOICES) 
-    target4 = models.CharField(max_length=4, choices=TARGET_CHOICES, blank=True) 
 
 
     def __str__(self):
