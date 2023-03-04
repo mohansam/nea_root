@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 
 # Create your views here.
 
@@ -48,6 +48,30 @@ def view_results(request):
     return render(request, 'academic/view_results.html')
 
 
+@login_required(login_url=reverse_lazy('login'))
+def update_test(request,test_id):
+    user_id=request.user.id
+    if request.method == 'POST':
+        form = TestsForm(request.POST, request.FILES)
+        if form.is_valid():
+            tests = form.save(commit=False)
+            try:
+                tests.username = request.user
+            except Exception:
+                pass
+            tests.save()
+            return HttpResponseRedirect('/academic/submitted_results/')
+        return render(request, 'academic/add_results.html', {'form': form})        
+    else:
+      instance = get_object_or_404(Tests, username=user_id,id=test_id)
+      form = TestsForm(None,instance=instance)
+      return render(request, 'academic/add_results.html', {'form': form})
+    
+@login_required(login_url=reverse_lazy('login'))
+def delete_test(request,test_id):
+    user_id=request.user.id
+    Tests.objects.filter(username=user_id,id=test_id).delete()
+    return HttpResponseRedirect('/academic/submitted_results/')
 
 @login_required(login_url=reverse_lazy('login'))
 def get_results_between_date_range(request):

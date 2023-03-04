@@ -28,7 +28,8 @@
           <th>TestTitle</th>
           <th>TestOutOf</th>
           <th>TestMarks</th>    
-          <th>Test Given Date</th>        
+          <th>Test Given Date</th>
+          <th>Action</th>       
       </tr>
       </thead>
     <tbody>
@@ -38,7 +39,11 @@
         <td>{{ result.test_title }}</td> 
         <td>{{ result.test_outof }}</td> 
         <td>{{ result.test_marks }}</td>   
-        <td>{{ result.test_given_date }}</td>         
+        <td>{{ result.test_given_date }}</td>  
+        <td> 
+          <a href='/academic/update_test/{{result.id}}'><i class="material-icons" style="font-size:30px;color:rgb(0, 255, 115)">update</i> </a>
+          <a href='/academic/delete_test/{{result.id}}'> <i class="material-icons" style="font-size:30px;color:red">delete_forever</i></a>
+        </td>            
       </tr>
     {% endfor %}
     </tbody>  

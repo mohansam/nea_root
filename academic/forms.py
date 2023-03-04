@@ -11,6 +11,11 @@ class TestsForm(ModelForm):
         fields = [
           'test_subject', 'test_title','test_given_date', 'test_marks', 'test_outof'
         ]
+    def __init__(self, *args, **kwargs):
+      super(TestsForm, self).__init__(*args, **kwargs)
+    # input_formats parses HTML5 datetime-local input to datetime field
+      self.fields['test_given_date'].input_formats = ('%Y-%m-%dT%H:%M',)
+
     def clean(self):
         cleaned_data = super().clean()
         test_marks = cleaned_data.get('test_marks')
