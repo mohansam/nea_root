@@ -1,40 +1,38 @@
 {% extends "base.html" %}
 
 {% block title %}Posts{% endblock title %}
+{%block scripts%}
+<script  type='text/javascript'>
+      $(function(){
+    $("#UserList").dataTable({
+    "paging": false,
+    "searching": true,
+    "info": false
+  } );
+  })
+</script>
+{%endblock scripts%}
 
 {% block content %}
-
-<div class="column">
-
-{% for profile in profiles %}
-
-    <div class="block">
+<table id="UserList" class="table is-bordered">
+  <thead>
+    <tr>
       <div class="card">
-        <a href="{% url 'posts:profile' profile.id %}">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img src="https://bulma.io/images/placeholders/96x96.png"
-                       alt="Placeholder image">
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-5">
-                  {{ profile.user.username }}
-                </p>
-                <p class="subtitle is-7">
-                  @{{ profile.user.username|lower }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </a>
+        <th>UserList</th>      
       </div>
-    </div>
-
+  </tr>
+  </thead>
+<tbody>
+  {%   for profile in profiles %}
+  <tr>
+    <td> 
+      <div class="card media-content">
+      <a href="{% url 'posts:profile' profile.id %}">  <p class="title is-5">{{ profile.user.username }} </p> </a> 
+    </td>  
+    </div>     
+  </tr>
 {% endfor %}
-
-</div>
+</tbody>  
+ </table>
 
 {% endblock content %}

@@ -89,6 +89,7 @@
 }
 .dataTables_wrapper{
     width: 900px;
+    text-align: center;
 }
 
 #topnavbar {
