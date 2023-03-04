@@ -45,8 +45,11 @@ class Text_Post(models.Model):
         return (
             f"{self.user} "
             f"({self.created_at:%Y-%m-%d %H:%M}): "
-            f"{self.body[:30]}..."
-        )
+            f"{self.body[:30]}...") 
+
+    def save(self, *args, **kwargs): 
+        self.updated_at = timezone.now()
+        return super().save(*args, **kwargs)
 
 #previous_post = Text_Post.objects.filter(user=User).order_by("-created_at").first()
 #new_post = Text_Post.objects.create(user=User, body=new_post.body)
