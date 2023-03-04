@@ -36,6 +36,7 @@ class Text_Post(models.Model):
     )
     body = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at= models.DateTimeField(auto_now_add=True)
     #next = models.OneToOneField("self", on_delete=models.DO_NOTHING, null=True, blank=True, related_name="previous")
 
     

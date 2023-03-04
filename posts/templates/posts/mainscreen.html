@@ -47,8 +47,12 @@
                 <div class="box">
                     {{ post.body }}
                     <span class="is-small has-text-grey-light">
-                        ({{ post.created_at }} by {{ post.user.username }}
+                        {{ post.updated_at }} by {{ post.user.username }} 
                     </span>
+                    {% if post.user_id == user_id %}
+                    <a href='/posts/update_post/{{post.id}}'><i class="material-icons" style="font-size:30px;color:rgb(0, 255, 115)">update</i> </a>
+                    <a href='/posts/delete_post/{{post.id}}'> <i class="material-icons" style="font-size:30px;color:red">delete_forever</i></a>
+                    {% endif %}
                 </div>
         {% endfor %}
     </div>
