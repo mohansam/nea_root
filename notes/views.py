@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 
 # Create your views here.
 
@@ -46,8 +46,33 @@ def search_notes(request):
     notes_list=[]
     all_notes=Notes.objects.filter(username=user_id).order_by('-id')
     for note in all_notes:
-        temp_dict={'title':note.title,'body_text':note.body_text}
+        temp_dict={'title':note.title,'body_text':note.body_text,'id':note.id}
         notes_list.append(temp_dict)
     matched_notes=find_matching_notes(search_text,notes_list)
     notes_json=json.dumps(matched_notes)
-    return JsonResponse(json.loads(notes_json), status=200,safe=False)  
+    return JsonResponse(json.loads(notes_json), status=200,safe=False)
+
+@login_required(login_url=reverse_lazy('login'))
+def update_note(request,note_id):
+    user_id=request.user.id
+    if request.method == 'POST':
+        form = NotesForm(request.POST)
+        if form.is_valid():
+            notes = form.save(commit=False)
+            try:
+                notes.username = request.user
+            except Exception:
+                pass
+            notes.save()
+            return HttpResponseRedirect('/notes/view_notes/')
+        return render(request, 'notes/add_notes.html', {'form': form})
+    else:
+      instance = get_object_or_404(Notes, username=user_id,id=note_id)
+      form = NotesForm(None,instance=instance)
+      return render(request, 'notes/add_notes.html', {'form': form})
+    
+@login_required(login_url=reverse_lazy('login'))
+def delete_note(request,note_id):
+    user_id=request.user.id
+    Notes.objects.filter(username=user_id,id=note_id).delete()
+    return HttpResponseRedirect('/notes/view_notes/')

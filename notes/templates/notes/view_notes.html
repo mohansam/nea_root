@@ -15,6 +15,7 @@
     columns: [
           { data: 'title' },
           { data: 'body_text' },
+          { data: 'id' }
         ],
     "paging": false,
     "searching": false,
@@ -26,14 +27,17 @@
     inputSearchBox.addEventListener('keyup',async(event)=>{
      // listening for enter key
       if (event.keyCode === 13) {
-        const data= await searchNotes(event.target.value)
+        const data= await searchNotes(event.target.value);
         populateTable(data);
       }
     })
   function populateTable(data){
-    console.log(data);
-    console.log(notesTable);
-    notesTable.clear().rows.add(data).draw();
+    const dataWithActionButton=data.map(item=>{
+          const actionButton=` <a href='/notes/update_note/${item.id}'><i class="material-icons" style="font-size:30px;color:rgb(0, 255, 115)">update</i> </a>
+          <a href='/notes/delete_note/${item.id}'> <i class="material-icons" style="font-size:30px;color:red">delete_forever</i></a>`;
+          return {...item,id:actionButton}
+        })
+    notesTable.clear().rows.add(dataWithActionButton).draw();
   }
   async function searchNotes(searchText){
     const destinationUrl= new URL(`${location.origin}/notes/search_notes`);
@@ -57,7 +61,8 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Body</th>  
+        <th>Body</th>
+        <th>Action</th>  
     </tr>
     </thead>
   <tbody>

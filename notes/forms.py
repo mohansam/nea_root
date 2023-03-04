@@ -12,9 +12,11 @@ class NotesForm(ModelForm):
     class Meta:
         model = Notes
         fields = ['title','body_text' ]
-
-    def clean_body_text(self):
-        body_text = self.cleaned_data['body_text']
-        if profanity.contains_profanity(body_text):
-            raise forms.ValidationError('Subject contains profanity')
-        return body_text
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        body_text = cleaned_data.get('body_text')
+        title = cleaned_data.get('title')
+        if  profanity.contains_profanity(body_text) or profanity.contains_profanity(title) :
+            raise forms.ValidationError('Subject contains profanity ')
+        return cleaned_data
