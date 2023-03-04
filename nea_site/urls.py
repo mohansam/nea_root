@@ -34,6 +34,7 @@ urlpatterns = [
     path('revision_resources/', include('revision.urls')),
     path('', include('cal.urls')),
     path('', views.homepage, name='homepage'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('posts/', include('posts.urls')),
     path('', include('pages.urls')),
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
