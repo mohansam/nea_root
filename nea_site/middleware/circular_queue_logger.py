@@ -9,17 +9,17 @@ class CircularQueue:
         self.head = 0
         self.tail = 0
 
-    def _find_index(self, idx):
-        if self.queue[idx] is not None:
-            idx = (idx + 1) % self.size
-            return self._find_index(idx)
-        return idx
+    def _find_index(self, index):
+        if self.queue[index] is not None:
+            index = (index + 1) % self.size
+            return self._find_index(index)
+        return index
 
     def enqueue(self, item):
         if self.is_full():
             return False
-        idx = self._find_index(self.tail)
-        self.queue[idx] = item
+        index = self._find_index(self.tail)
+        self.queue[index] = item
         self.tail = (self.tail + 1) % self.size
         return True
 
@@ -57,8 +57,8 @@ class CircularQueueMiddleware:
         return response
 
     def _write_to_file(self):
-        with open("logs.txt", "a") as f:
+        with open("logs.txt", "a") as file:
             while not self.queue.is_empty():
                 request, response = self.queue.dequeue()
                 log = f"{request.method} {request.path} {request.user} {response.status_code}\n"
-                f.write(log)
+                file.write(log)

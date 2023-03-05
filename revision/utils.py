@@ -21,54 +21,54 @@ class LinkedList:
 		if self.head is None:
 			self.head = new_node
 			return
-		curr_node = self.head
-		while curr_node.next is not None:
-			curr_node = curr_node.next
+		current_node = self.head
+		while current_node.next is not None:
+			current_node = current_node.next
 			
 		# Append the new node at the end
 		# of the linked list
-		curr_node.next = new_node
+		current_node.next = new_node
 		
-	def sortedMerge(self, a, b):
+	def sortedMerge(self, node1, node2):
 		result = None
 		
 		# Base cases
-		if a == None:
-			return b
-		if b == None:
-			return a
+		if node1 == None:
+			return node2
+		if node2 == None:
+			return node1
 			
 		# pick either a or b and recur..
-		if a.data <= b.data:
-			result = a
-			result.next = self.sortedMerge(a.next, b)
+		if node1.data <= node2.data:
+			result = node1
+			result.next = self.sortedMerge(node1.next, node2)
 		else:
-			result = b
-			result.next = self.sortedMerge(a, b.next)
+			result = node2
+			result.next = self.sortedMerge(node1, node2.next)
 		return result
 	
-	def mergeSort(self, h):
+	def mergeSort(self, head):
 		
 		# Base case if head is None
-		if h == None or h.next == None:
-			return h
+		if head == None or head.next == None:
+			return head
 
 		# get the middle of the list
-		middle = self.getMiddle(h)
-		nexttomiddle = middle.next
+		middle = self.getMiddle(head)
+		next_to_middle = middle.next
 
 		# set the next of middle node to None
 		middle.next = None
 
 		# Apply mergeSort on left list
-		left = self.mergeSort(h)
+		left = self.mergeSort(head)
 		
 		# Apply mergeSort on right list
-		right = self.mergeSort(nexttomiddle)
+		right = self.mergeSort(next_to_middle)
 
 		# Merge the left and right lists
-		sortedlist = self.sortedMerge(left, right)
-		return sortedlist
+		sorted_list = self.sortedMerge(left, right)
+		return sorted_list
 	
 	# Utility function to get the middle
 	# of the linked list

@@ -3,26 +3,26 @@ from nea_site.settings import ENCRYPT_KEY
 # source https://stackoverflow.com/questions/5131227/custom-python-encryption-algorithm
 def encrypt_data(value):
     encrypted = []
-    for i, c in enumerate(value):
-        key_c = ord(ENCRYPT_KEY[i % len(value)])
-        msg_c = ord(c)
-        encrypted.append(chr((msg_c + key_c) % 127))
+    for index, character in enumerate(value):
+        key_character = ord(ENCRYPT_KEY[index % len(value)])
+        msg_character = ord(character)
+        encrypted.append(chr((key_character + msg_character) % 127))
     return ''.join(encrypted)
 
 
 def decrypt_data(encrypted_value):
     msg = []
-    for i, c in enumerate(encrypted_value):
-        key_c = ord(ENCRYPT_KEY[i % len(ENCRYPT_KEY)])
-        enc_c = ord(c)
-        msg.append(chr((enc_c - key_c) % 127))
+    for index, character in enumerate(encrypted_value):
+        key_character = ord(ENCRYPT_KEY[index % len(ENCRYPT_KEY)])
+        enc_character = ord(character)
+        msg.append(chr((enc_character - key_character) % 127))
     return ''.join(msg)
 
 # Define function to generate trigrams for a given string
 def generate_trigrams(text):
     trigrams = []
-    for i in range(len(text)-2):
-        trigrams.append(text[i:i+3])
+    for index in range(len(text)-2):
+        trigrams.append(text[index:index+3])
     return trigrams
 
 def fuzzy_text_search(query, corpus, threshold=0.5):

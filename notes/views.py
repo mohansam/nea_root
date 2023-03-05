@@ -55,8 +55,9 @@ def search_notes(request):
 @login_required(login_url=reverse_lazy('login'))
 def update_note(request,note_id):
     user_id=request.user.id
-    if request.method == 'POST':
-        form = NotesForm(request.POST)
+    instance = get_object_or_404(Notes, username=user_id,id=note_id)
+    form = NotesForm(request.POST or None,instance=instance)
+    if request.method == 'POST':        
         if form.is_valid():
             notes = form.save(commit=False)
             try:
@@ -65,11 +66,7 @@ def update_note(request,note_id):
                 pass
             notes.save()
             return HttpResponseRedirect('/notes/view_notes/')
-        return render(request, 'notes/add_notes.html', {'form': form})
-    else:
-      instance = get_object_or_404(Notes, username=user_id,id=note_id)
-      form = NotesForm(None,instance=instance)
-      return render(request, 'notes/add_notes.html', {'form': form})
+    return render(request, 'notes/add_notes.html', {'form': form})
     
 @login_required(login_url=reverse_lazy('login'))
 def delete_note(request,note_id):

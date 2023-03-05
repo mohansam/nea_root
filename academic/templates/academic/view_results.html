@@ -18,9 +18,6 @@ drawChart('pie');
   $("#pie").click(function() {
     drawChart('pie',labels,datasets);
   });
-  $("#doughnut").click(function() {
-    drawChart('doughnut',labels,datasets);
-  });
   $("#getNewData").click(async()=>{
     const startDuration= document.getElementById('startDuration').value;
     const endDuration= document.getElementById('endDuration').value;
