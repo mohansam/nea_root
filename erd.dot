@@ -1,7 +1,7 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-03-04 16:25
-  // Cli Options: -a
+  // Created: 2023-03-05 21:10
+  // Cli Options: -a -o erd.dot
 
   fontname = "Roboto"
   fontsize = 8
@@ -450,6 +450,14 @@ digraph model_graph {
   
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT COLOR="#7B7B7B" FACE="Roboto">created_at</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto">updated_at</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
     </TD></TR>
