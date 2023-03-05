@@ -35,15 +35,18 @@ ul {
 
 .eventP1 {
   color: red;
-  font-size: 22px;
+  font-size: 20px;
+  display: contents;
 }
 .eventP2 {
   color: orange;
-  font-size: 22px;
+  font-size: 20px;
+  display: contents;
 }
 .eventP3 {
   color: green;
-  font-size: 22px;
+  font-size: 20px;
+  display: contents;
 }
 
 .topnavbar {

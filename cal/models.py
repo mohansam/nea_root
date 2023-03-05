@@ -19,6 +19,10 @@ class Event(models.Model):
 
     @property
     def get_html_url(self):
-        url = reverse('cal:event_edit', args=(self.id,))
         event_type_class={'HIGH':'eventP1','Medium':'eventP2','Low':'eventP3'}
-        return f'<a  class="{event_type_class[self.priority]}" href="{url}"> <b>{self.title}</b> </a>'
+        str= f'<p class="{event_type_class[self.priority]}"><b>{self.title}</b> </p>'
+        edit= f'<a href="/event/update_event/{self.id}"><i class="material-icons" style="font-size:30px;color:rgb(0, 255, 115)">update</i> </a>'
+        delete_str=f'<a href="/event/delete_event/{self.id}"> <i class="material-icons" style="font-size:30px;color:red">delete_forever</i></a>'
+        return str+edit+delete_str
+               
+                

@@ -70,3 +70,9 @@ def event(request, event_id=None):
         event_obj.save()
         return HttpResponseRedirect(reverse('cal:calendar'))
     return render(request, 'cal/event.html', {'form': form})
+
+@login_required(login_url=reverse_lazy('login'))
+def delete_event(request,event_id):
+    user_id=request.user.id
+    Event.objects.filter(username_id=user_id,id=event_id).delete()
+    return HttpResponseRedirect('/calendar/')
