@@ -51,8 +51,9 @@ def view_results(request):
 @login_required(login_url=reverse_lazy('login'))
 def update_test(request,test_id):
     user_id=request.user.id
+    instance = get_object_or_404(Tests, username=user_id,id=test_id)
+    form = TestsForm(request.POST or None,instance=instance)
     if request.method == 'POST':
-        form = TestsForm(request.POST, request.FILES)
         if form.is_valid():
             tests = form.save(commit=False)
             try:
@@ -60,12 +61,8 @@ def update_test(request,test_id):
             except Exception:
                 pass
             tests.save()
-            return HttpResponseRedirect('/academic/submitted_results/')
-        return render(request, 'academic/add_results.html', {'form': form})        
-    else:
-      instance = get_object_or_404(Tests, username=user_id,id=test_id)
-      form = TestsForm(None,instance=instance)
-      return render(request, 'academic/add_results.html', {'form': form})
+            return HttpResponseRedirect('/academic/submitted_results/')      
+    return render(request, 'academic/add_results.html', {'form': form})
     
 @login_required(login_url=reverse_lazy('login'))
 def delete_test(request,test_id):

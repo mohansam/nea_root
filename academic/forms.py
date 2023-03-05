@@ -7,7 +7,7 @@ class TestsForm(ModelForm):
     class Meta:
         model = Tests
         widgets = {
-      'test_given_date': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%d')}
+      'test_given_date': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M')}
         fields = [
           'test_subject', 'test_title','test_given_date', 'test_marks', 'test_outof'
         ]
