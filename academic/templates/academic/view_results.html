@@ -4,6 +4,8 @@
 <script  type='text/javascript'>
 
 $(document).ready(async()=>{
+  var submitButton = document.getElementById('getNewData');
+  submitButton.disabled = true;
 const response=await getSourceData();
 let  labels=response.labels;
 let datasets=response.datasets;
@@ -26,6 +28,24 @@ drawChart('pie');
     datasets=response.datasets;
     drawChart('doughnut');
   });
+
+  function checkInputs() {
+  console.log('hi');
+  var startDate = Date.parse(new Date(document.getElementById('startDuration').value));
+  var endDate = Date.parse(new Date(document.getElementById('endDuration').value));
+  var submitButton = document.getElementById('getNewData');
+  
+  if (endDate>=startDate ) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
+}
+
+document.getElementById('startDuration').addEventListener('input', checkInputs);
+document.getElementById('endDuration').addEventListener('input', checkInputs);
+
+
   var myChart;
   var config={}
   function drawChart(chartType) {
@@ -77,18 +97,46 @@ function getRandomColor() {
 {%endblock scripts%}
 
 {%block content%}
-<div>
-  <label for="SelectChartType">SelectChartType</label>
-  <button id='line'>line</button>
-  <button id='bar'>bar</button>
-  <button id='pie'>pie</button>
-  <label for="selectDuration">selectDuration</label>
-  <input type="date" id="startDuration" name="startDuration">
-  <input type="date" id="endDuration" name="endDuration">
-  <button id='getNewData'>Submit</button>
-  <!-- displaying the chart -->
-  <!-- you can also play around with the width and height to increase or decrease the chart size -->
-  <canvas id="myChart" width="200" height="100"></canvas>  
+<div class="columns mt-3">
+  <div class="colum">
+    <div class="columns mt-3 ml-2">
+     <div class="colum">
+      <label for="SelectChartType">SelectChartType :</label>
+     </div>
+     <div class="colum">
+      <button id='line'>line</button>
+     </div>
+     <div class="colum">
+      <button id='bar'>bar</button>
+     </div>
+     <div class="colum">
+      <button id='pie'>pie</button>
+     </div>
+    </div>  
+    <div class="columns mt-3 ml-2">
+      <div class="colum">
+        <label for="selectDuration">startDuration:</label>
+      </div>
+      <div class="colum">
+        <input type="date" id="startDuration" class="input" name="startDuration">
+      </div>
+    </div>
+    <div class="columns mt-3 ml-2">
+      <div class="colum">
+        <label for="selectDuration">EndDuration:</label>
+      </div>
+      <div class="colum">
+        <input type="date" class="input" id="endDuration" name="endDuration">
+      </div>
+    </div>
+    <div class="columns mt-3 ml-5">
+      <div class="colum">
+        <button id='getNewData' class="button is-primary is-disabled">Submit</button>      </div>
+    </div> 
+  </div>
+  <div class="colum ml-5">
+    <canvas id="myChart" width="500" height="400"></canvas>  
+  </div>
 </div>
 
 {%endblock content%}
