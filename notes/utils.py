@@ -4,7 +4,7 @@ from nea_site.settings import ENCRYPT_KEY
 def encrypt_data(value):
     encrypted = []
     for index, character in enumerate(value):
-        key_character = ord(ENCRYPT_KEY[index % len(value)])
+        key_character = ord(ENCRYPT_KEY[index % len(ENCRYPT_KEY)])
         msg_character = ord(character)
         encrypted.append(chr((key_character + msg_character) % 127))
     return ''.join(encrypted)

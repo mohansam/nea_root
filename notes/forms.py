@@ -17,6 +17,8 @@ class NotesForm(ModelForm):
         cleaned_data = super().clean()
         body_text = cleaned_data.get('body_text')
         title = cleaned_data.get('title')
-        if  profanity.contains_profanity(body_text) or profanity.contains_profanity(title) :
+        if title is None or body_text is None:
+            return cleaned_data
+        if profanity.contains_profanity(body_text) or profanity.contains_profanity(title) :
             raise forms.ValidationError('Subject contains profanity ')
         return cleaned_data
