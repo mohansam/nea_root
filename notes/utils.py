@@ -50,7 +50,7 @@ def find_matching_notes(search_str,notes_list):
         return notes_list
     matched_list=[]
     for note in notes_list:
-        match=fuzzy_text_search(search_str,note['body_text'],0.2)
+        match=fuzzy_text_search(search_str,note['body_text'],0.1)
         if(match):
             matched_list.append(note)
     return matched_list

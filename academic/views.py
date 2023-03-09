@@ -9,6 +9,8 @@ import json
 from .models import Tests
 from .forms import TestsForm
 import datetime
+import math
+
 
 
 from django.urls import reverse_lazy
@@ -86,11 +88,11 @@ def get_results_between_date_range(request):
     for test_list in test_list_query_set:
            subject_name=test_list.test_subject.subject_name
            if  subject_name not in result_tracker_dict:
-              result_tracker_dict[subject_name]={'test_marks':0,'test_outof':0}
-           result_tracker_dict[subject_name]['test_marks']+=int(test_list.test_marks)
-           result_tracker_dict[subject_name]['test_outof']+=int(test_list.test_outof)
+              result_tracker_dict[subject_name]={'mark_percentage':0,'test_given_count':0}
+           result_tracker_dict[subject_name]['mark_percentage']+=(float(test_list.test_marks)/float(test_list.test_outof))*100
+           result_tracker_dict[subject_name]['test_given_count']+=1
     for subject_key in result_tracker_dict:
-        subject_percentage_dict[subject_key]=(result_tracker_dict[subject_key]['test_marks']/result_tracker_dict[subject_key]['test_outof'])*100
+        subject_percentage_dict[subject_key]=round(result_tracker_dict[subject_key]['mark_percentage']/result_tracker_dict[subject_key]['test_given_count'],2)
     test_list_json=json.dumps(subject_percentage_dict)
     return JsonResponse(json.loads(test_list_json), status=200,safe=False)  
   
