@@ -40,7 +40,7 @@ class Calendar(HTMLCalendar):
 	# formats a month as a table
 	# filter events by year and month
 	def formatmonth(self, user_id,withyear=True,):
-		events = Event.objects.filter(start_time__year=self.year, start_time__month=self.month , username_id=user_id)
+		events = Event.objects.filter(start_time__year=self.year,username_id=user_id).filter(Q(start_time__month=self.month)|Q(end_time__month=self.month))
 		cal_table=self.create_html_table(events,withyear)
 		cal=f'<div>{cal_table}</div>'
 		return cal
